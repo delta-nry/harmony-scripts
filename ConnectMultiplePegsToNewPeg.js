@@ -47,3 +47,4 @@ function connectMultiplePegsToNewPeg() {
 
     scene.endUndoRedoAccum();
 }
+
