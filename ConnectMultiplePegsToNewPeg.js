@@ -6,7 +6,11 @@ function connectMultiplePegsToNewPeg() {
     var totalX = 0;
     var newPegName = "New_Peg";
     var newPegPath = "";
-    var selectedNodes = selection.selectedNodes();
+    var selectedNodes = [];
+
+    scene.beginUndoRedoAccum("ConnectMultiplePegsToNewPeg");
+
+    selectedNodes = selection.selectedNodes();
 
     if (selectedNodes.length < 1) {
         MessageBox.information("Please select a Peg node");
@@ -20,7 +24,7 @@ function connectMultiplePegsToNewPeg() {
         return;
     }
 
-    selectedNodes.sort(function(a,b) {
+    selectedNodes.sort(function(a, b) {
         return node.coordX(a) - node.coordX(b);
     });
     
@@ -40,4 +44,6 @@ function connectMultiplePegsToNewPeg() {
             MessageBox.information("Could not connect the new Peg to " + n);
         }
     });
+
+    scene.endUndoRedoAccum();
 }
